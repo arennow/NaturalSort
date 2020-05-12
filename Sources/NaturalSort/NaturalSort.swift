@@ -19,6 +19,10 @@ extension StringProtocol {
 	}
 	
 	public func naturalCompare<S: StringProtocol>(to other: S) -> Bool {
-		self.sortableBase().compare(other.sortableBase(), options: [.caseInsensitive, .numeric]) == .orderedAscending
+		self.naturalCompare(to: other) == .orderedAscending
+	}
+	
+	public func naturalCompare<S: StringProtocol>(to other: S) -> ComparisonResult {
+		self.sortableBase().compare(other.sortableBase(), options: [.caseInsensitive, .numeric])
 	}
 }
