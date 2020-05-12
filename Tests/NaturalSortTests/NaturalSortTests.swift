@@ -18,7 +18,8 @@ final class NaturalSortTests: XCTestCase {
 		("testRemoveAn", testRemoveAn),
 		("testRemoveA", testRemoveA),
 		("testCaseInsensitive", testCaseInsensitive),
-		("testNumbers", testNumbers)
+		("testNumbers", testNumbers),
+		("testRemoveLeadingPunctuation", testRemoveLeadingPunctuation)
 	]
 	
 	func testBasicSort() {
@@ -51,5 +52,16 @@ final class NaturalSortTests: XCTestCase {
 	func testNumbers() {
 		assertAscending("Heinz 47 flavors".naturalCompare(to: "HEINZ 500 FLAVORS"))
 		assertDescending("Heinz 47 flavors".naturalCompare(to: "heinz 5 flavors"))
+	}
+	
+	func testRemoveLeadingPunctuation() {
+		assertAscending("You are welcome".naturalCompare(to: #""YOUR WELCOME""#))
+		assertAscending("You are welcome".naturalCompare(to: #"" YOUR WELCOME""#))
+		
+		assertDescending("$50".naturalCompare(to: "5 dollars"))
+		
+		assertDescending("¡Gracias!".naturalCompare(to: "Awesome!"))
+		
+		assertDescending("***SPECIAL UPDATE***".naturalCompare(to: "Really awesome news"))
 	}
 }

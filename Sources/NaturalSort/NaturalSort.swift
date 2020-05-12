@@ -7,13 +7,15 @@ extension StringProtocol {
 	}
 	
 	internal func sortableBase() -> SubSequence {
+		let subst = self.drop(while: { !$0.isLetter && !$0.isNumber })
+		
 		for pref in ["the ", "an ", "a "] {
 			if self.hasCaseInsensitivePrefix(pref) {
-				return self[pref.endIndex...]
+				return subst[pref.endIndex...]
 			}
 		}
 		
-		return self[...]
+		return subst
 	}
 	
 	public func naturalCompare<S: StringProtocol>(to other: S) -> Bool {
